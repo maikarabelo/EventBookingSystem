@@ -1,0 +1,68 @@
+﻿@model IEnumerable<EventBookingSystem.Models.Booking>
+
+<h1>Bookings</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-2">Add New Booking</a>
+
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="row g-2 align-items-end">
+        <div class="col-auto">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input type="date" name="startDate" id="startDate" class="form-control" />
+        </div>
+        <div class="col-auto">
+            <label for="endDate" class="form-label">End Date</label>
+            <input type="date" name="endDate" id="endDate" class="form-control" />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-success">Filter</button>
+        </div>
+    </div>
+</form>
+
+<form asp-action="SearchBookings" method="get">
+    <div class="mb-2">
+        <input type="text" class="form-control d-inline" style="width: 300px;" name="searchQuery" placeholder="Search by Booking ID, Event, Venue, etc." />
+        <button type="submit" class="btn btn-primary ms-2">Search</button>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Customer Name</th>
+            <th>Event</th>
+            <th>Event Type</th>
+            <th>Venue</th>
+            <th>Booked On</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.BookingId</td>
+                    <td>@booking.Customer.FullName</td>
+                    <td>@booking.Event.EventName</td>
+                    <td>@booking.Event.EventType.Name</td>
+                    <td>@booking.Venue.VenueName</td>
+                    <td>@booking.BookingDate.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@booking.BookingId" class="btn btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@booking.BookingId" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">No bookings found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,16 @@
+﻿@model List<string>
+
+<form asp-action="Upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <button type="submit">Upload</button>
+</form>
+
+<h2>Uploaded Images</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    @foreach (var url in Model)
+    {
+        <div>
+            <img src="@url" alt="Image" style="max-width: 200px; max-height: 200px;" />
+        </div>
+    }
+</div>

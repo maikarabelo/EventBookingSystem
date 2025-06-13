@@ -1,0 +1,45 @@
+﻿@model IEnumerable<EventBookingSystem.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customer List";
+}
+
+<h1>Customers</h1>
+
+
+<a asp-action="Create" class="btn btn-primary mb-2">Add New Customer</a>
+
+<!-- Booking List Table -->
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@customer.FullName</td>
+                    <td>@customer.Email</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Customer", new { id = customer.CustomerId })" class="btn btn-primary">Edit</a>
+                        <a href="@Url.Action("Delete", "Customer", new { id = customer.CustomerId })" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+		else
+		{
+			<tr>
+				<td colspan="3" class="text-center">No customers found.</td>
+			</tr>
+		}
+    </tbody>
+</table>
+
+

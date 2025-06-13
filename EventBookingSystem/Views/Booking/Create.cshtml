@@ -1,0 +1,48 @@
+﻿@model EventBookingSystem.Models.Booking
+
+
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<h1>Create Booking</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="CustomerId" class="control-label">Customer Name</label>
+        <select asp-for="CustomerId" class="form-control" required asp-items="@(ViewData["CustomerId"] as SelectList)">
+            <option value="">Select Customer</option>
+        </select>
+        <span asp-validation-for="CustomerId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label asp-for="EventId" class="control-label">Event Name</label>
+        <select asp-for="EventId" class="form-control" required asp-items="@(ViewData["EventId"] as SelectList)">
+            <option value="">Select Event</option>
+        </select>
+        <span asp-validation-for="EventId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label asp-for="VenueId" class="control-label">Venue Name</label>
+        <select asp-for="VenueId" class="form-control" required asp-items="@(ViewData["VenueId"] as SelectList)">
+            <option value="">Select Venue</option>
+        </select>
+        <span asp-validation-for="VenueId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label asp-for="BookingDate" class="control-label"></label>
+        <input asp-for="BookingDate" class="form-control" required type="date" />
+        <span asp-validation-for="BookingDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary mt-2">Create</button>
+        <a asp-action="Index" class="btn btn-secondary mt-2">Cancel</a>
+    </div>
+</form>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<EventBookingSystem.Models.Event>
+<h1>Events</h1>
+
+<!-- Button to Create New Booking -->
+<a asp-action="Create" class="btn btn-primary mb-2">Add New Event</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Event Date</th>
+            <th>Venue Name</th>
+            <th>Description</th>
+            <th>Event Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+
+            {
+                <tr>
+                    <td>@item.EventName</td>
+                    <td>@item.EventDate.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Venue.VenueName</td>
+                    <td>@item.Description</td>
+                    <td>@item.EventType.Name</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Event", new { id = item.EventId })" class="btn btn-primary">Edit</a>
+                        <a href="@Url.Action("Delete", "Event", new { id = item.EventId })" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+
+            }
+        }
+		else
+		{
+			<tr>
+				<td colspan="5" class="text-center">No events found.</td>
+			</tr>
+		}
+    </tbody>
+</table>

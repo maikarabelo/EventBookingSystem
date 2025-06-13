@@ -1,0 +1,43 @@
+﻿@model EventBookingSystem.Models.Venue
+
+@{
+
+    ViewData["Title"] = "Edit Venue";
+
+}
+
+<h1>Edit Venue</h1>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="VenueID">Venue ID</label>
+        <input asp-for="VenueId" class="form-control" readonly />
+        <span asp-validation-for="VenueId" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-2">
+        <label for="VenueName">Venue Name</label>
+        <input asp-for="VenueName" required class="form-control" />
+        <span asp-validation-for="VenueName" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-2">
+        <label for="Location">Location</label>
+        <input asp-for="Location" required class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-2">
+        <label for="Capacity">Capacity</label>
+        <input asp-for="Capacity" required class="form-control" />
+        <span asp-validation-for="Capacity" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-2">
+        <label for="imageFile">Venue Image</label>
+        <input type="file" class="form-control" id="imageFile" name="imageFile" required />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary mt-2">Save Changes</button>
+        <a asp-action="Index" class="btn btn-secondary mt-2">Cancel</a>
+    </div>
+</form>
+
+
+
